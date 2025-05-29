@@ -30,7 +30,7 @@ class ProdutoAdapter(
 
     override fun onBindViewHolder(holder: ProdutoViewHolder, position: Int) {
         val produto = produtos[position]
-        holder.tvNomeProduto.text = "${produto.nome} (${produto.quantidade})"
+        holder.tvNomeProduto.text = "${produto.nome} - ${produto.quantidade}"
 
         holder.btnAdicionar.setOnClickListener {
             it.animate().scaleX(0.9f).scaleY(0.9f).setDuration(50).withEndAction {

@@ -7,6 +7,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.room.Room
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,22 +22,33 @@ class MainActivity : AppCompatActivity() {
 
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
 
+//        // Cria a instância do banco de dados
+//        val db = Room.databaseBuilder(
+//            applicationContext,
+//            AppDatabase::class.java, "estoque.db"
+//        ).build()
+//
+//        // Cria a instância do DAO
+//        val produtoDao = db.produtoDao()
+
+
         //Criar dados falsos
         val listaFake = mutableListOf(
-            Produto("Pão", 56),
-            Produto("Hambúrguer", 54),
-            Produto("Queijo", 43),
-            Produto("Alface", 12),
-            Produto("Tomate", 23),
-            Produto("Bacon", 2),
-            Produto("Molho especial", 24),
-            Produto("Salsicha", 56),
-            Produto("Laranja", 54),
-            Produto("Açaí", 43),
-            Produto("Cebola", 12),
-            Produto("Detergente", 23),
-            Produto("Papel higiênico", 2),
-            Produto("Papel toalha", 24),
+            Produto(null, "Pão", 56, TipoProduto.ALIMENTO),
+            Produto(null, "Hambúrguer", 54, TipoProduto.ALIMENTO),
+            Produto(null, "Queijo", 43, TipoProduto.ALIMENTO),
+            Produto(null, "Alface", 12, TipoProduto.ALIMENTO),
+            Produto(null, "Tomate", 23, TipoProduto.ALIMENTO),
+            Produto(null, "Bacon", 2, TipoProduto.ALIMENTO),
+            Produto(null, "Molho especial", 24, TipoProduto.ALIMENTO),
+            Produto(null, "Salsicha", 56, TipoProduto.ALIMENTO),
+            Produto(null, "Laranja", 54, TipoProduto.ALIMENTO),
+            Produto(null, "Açaí", 43, TipoProduto.ALIMENTO),
+            Produto(null, "Cebola", 12, TipoProduto.ALIMENTO),
+            Produto(null, "Detergente", 23, TipoProduto.PRODUTO_DE_LIMPEZA),
+            Produto(null, "Papel higiênico", 2, TipoProduto.PRODUTO_DE_LIMPEZA),
+            Produto(null, "Papel toalha", 24, TipoProduto.PRODUTO_DE_LIMPEZA),
+            Produto(null, "Coca Lata", 34, TipoProduto.BEBIDA)
         )
 
         //Adapter com os dados
