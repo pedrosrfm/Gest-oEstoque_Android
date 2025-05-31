@@ -1,6 +1,7 @@
-package com.example.estoque
+package com.example.estoque.database
 
 import androidx.room.*
+import com.example.estoque.model.Produto
 
 @Dao
 interface ProdutoDao {

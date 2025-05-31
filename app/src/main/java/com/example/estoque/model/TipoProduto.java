@@ -1,4 +1,4 @@
-package com.example.estoque;
+package com.example.estoque.model;
 
 public enum TipoProduto {
     ALIMENTO,

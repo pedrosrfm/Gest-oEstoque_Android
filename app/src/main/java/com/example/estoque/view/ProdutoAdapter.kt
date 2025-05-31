@@ -1,19 +1,30 @@
-package com.example.estoque
+package com.example.estoque.view
 
+import android.icu.text.UnicodeSetIterator
+import android.text.InputFilter
+import android.text.InputFilter.LengthFilter
 import android.text.InputType
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
+import com.example.estoque.R
+import com.example.estoque.model.Produto
 
 class ProdutoAdapter(
-    private val produtos: MutableList<Produto>
+    private var produtos: MutableList<Produto>,
+    private val onUpdate: (Produto) -> Unit,
+    private val onDelete: (Produto) -> Unit
 ) : RecyclerView.Adapter<ProdutoAdapter.ProdutoViewHolder>() {
+
+    fun setList(produtos: MutableList<Produto>) {
+        this.produtos = produtos
+        notifyDataSetChanged()
+    }
 
     inner class ProdutoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val tvNomeProduto: TextView = itemView.findViewById(R.id.tvNomeProduto)
@@ -37,6 +48,7 @@ class ProdutoAdapter(
                 it.animate().scaleX(1f).scaleY(1f).setDuration(50).start()
             }.start()
             produto.quantidade++
+            onUpdate(produto)
             notifyItemChanged(position)
         }
 
@@ -44,6 +56,7 @@ class ProdutoAdapter(
             val context = it.context
             val input = EditText(context)
             input.inputType = InputType.TYPE_CLASS_NUMBER
+            input.filters = arrayOf(InputFilter.LengthFilter(3))
             input.hint = "Quantidade"
 
             AlertDialog.Builder(context)
@@ -54,6 +67,7 @@ class ProdutoAdapter(
                     val quantidade = input.text.toString().toIntOrNull() ?: 0
                     if (quantidade > 0) {
                         produto.quantidade += quantidade
+                        onUpdate(produto)
                         notifyItemChanged(holder.adapterPosition)
                     }
                 }
@@ -70,6 +84,7 @@ class ProdutoAdapter(
 
             if (produto.quantidade > 0) {
                 produto.quantidade--
+                onUpdate(produto)
             }
             notifyItemChanged(position)
         }
@@ -78,6 +93,7 @@ class ProdutoAdapter(
             val context = it.context
             val input = EditText(context)
             input.inputType = InputType.TYPE_CLASS_NUMBER
+            input.filters = arrayOf(InputFilter.LengthFilter(3))
             input.hint = "Quantidade"
 
             AlertDialog.Builder(context)
@@ -88,6 +104,10 @@ class ProdutoAdapter(
                     val quantidade = input.text.toString().toIntOrNull() ?: 0
                     if (quantidade > 0) {
                         produto.quantidade -= quantidade
+                        if (produto.quantidade < 0) {
+                            produto.quantidade = 0
+                        }
+                        onUpdate(produto)
                         notifyItemChanged(holder.adapterPosition)
                     }
                 }
@@ -114,9 +134,7 @@ class ProdutoAdapter(
                     .setPositiveButton("Sim") { dialog, which ->
                         val position = holder.adapterPosition
                         if (position != RecyclerView.NO_POSITION) {
-                            produtos.removeAt(position)
-                            notifyItemRemoved(position)
-                            notifyItemRangeChanged(position, produtos.size)
+                            onDelete(produto)
                         }
                     }
                     .setNegativeButton("Não", null)
