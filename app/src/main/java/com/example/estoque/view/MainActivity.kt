@@ -1,6 +1,9 @@
 package com.example.estoque.view
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
+import android.widget.LinearLayout
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -9,7 +12,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.estoque.R
 import com.example.estoque.database.DatabaseController
+import com.example.estoque.databinding.ActivityMainBinding
 import com.example.estoque.model.Produto
+import com.example.estoque.view.CadastrarProdutoActivity
 import com.example.estoque.model.TipoProduto
 
 class MainActivity : AppCompatActivity() {
@@ -26,7 +31,16 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-//        dbController.criarProduto(Produto(nome = "Feijão", quantidade = 32, tipoProduto = TipoProduto.ALIMENTO))
+
+        val btnCadastro = findViewById<Button>(R.id.btnCadastrarNovoProduto)
+        btnCadastro.setOnClickListener{
+            val intent = Intent(this, CadastrarProdutoActivity::class.java)
+            startActivity(intent)
+        }
+
+
+//         Criar produto pra quando limpar o banco
+//         dbController.criarProduto(Produto(nome = "Feijão", quantidade = 32, tipoProduto = TipoProduto.ALIMENTO))
 
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
 
@@ -34,7 +48,6 @@ class MainActivity : AppCompatActivity() {
         atualizarProdutos()
         //Layout vertical
         recyclerView.layoutManager = LinearLayoutManager(this)
-
     }
 
     fun onUpdate(produto: Produto) {

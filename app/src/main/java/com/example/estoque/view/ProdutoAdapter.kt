@@ -31,7 +31,9 @@ class ProdutoAdapter(
         val btnAdicionar: ImageButton = itemView.findViewById(R.id.btnAdicionar)
         val btnRemover: ImageButton = itemView.findViewById(R.id.btnRemover)
         val btnDeletar: ImageButton = itemView.findViewById(R.id.btnDeletar)
+
     }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProdutoViewHolder {
         val view = LayoutInflater.from(parent.context)

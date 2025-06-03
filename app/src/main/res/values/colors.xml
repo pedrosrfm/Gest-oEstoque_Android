@@ -10,4 +10,5 @@
     <color name="textPrimary">#3E2723</color>
     <color name="textSecondary">#5D4037</color>
     <color name="error">#F44336</color>
+    <color name="disabled">@color/material_dynamic_neutral50</color>
 </resources>

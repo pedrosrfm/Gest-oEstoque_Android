@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:padding="16dp"
+    tools:context=".view.MainActivity">
+
+    <TextView
+        android:id="@+id/txtViewCabecalho"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cadastrar novo produto"
+        android:fontFamily="@font/geist"
+        android:textStyle="bold"
+        android:textSize="34sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/linearProduto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintTop_toBottomOf="@id/txtViewCabecalho"
+        app:layout_constraintBottom_toTopOf="@id/linearBotoes"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+    <EditText
+        android:id="@+id/edtTxtNome"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="0dp"
+        android:ems="10"
+        android:hint="Nome do produto"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtViewCabecalho" />
+
+    <EditText
+        android:id="@+id/edtTxtQuantidade"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="25dp"
+        android:ems="10"
+        android:hint="Quantidade"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtTxtNome" />
+
+    <TextView
+        android:id="@+id/txtViewTipoProduto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:text="Tipo do produto:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtTxtQuantidade" />
+
+    <RadioGroup
+        android:id="@+id/radioGrpTipoProduto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        app:buttonTint="@color/primary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtViewTipoProduto">
+
+        <RadioButton
+            android:id="@+id/radioBtnAlimento"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Alimento"
+            app:buttonTint="@color/primary"/>
+
+        <RadioButton
+            android:id="@+id/radioBtnBebida"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Bebida"
+            app:buttonTint="@color/primary"/>
+
+        <RadioButton
+            android:id="@+id/radioBtnLimpeza"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Produto de limpeza"
+            app:buttonTint="@color/primary"/>
+
+        <RadioButton
+            android:id="@+id/radioBtnOutro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Outro"
+            app:buttonTint="@color/primary"/>
+
+    </RadioGroup>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearBotoes"
+        android:layout_width="0dp"
+        android:layout_height="75dp"
+        android:orientation="horizontal"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <Button
+            android:id="@+id/btnCadastrar"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:backgroundTint="@color/primary"
+            android:fontFamily="@font/geist"
+            android:padding="12dp"
+            android:text="Cadastrar"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/btnCancelar"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/primary"
+            android:fontFamily="@font/geist"
+            android:padding="12dp"
+            android:text="Cancelar"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
