@@ -23,9 +23,12 @@ class DatabaseController {
         }
     }
 
-    fun deletarProduto(produto: Produto) {
+    fun deletarProduto(produto: Produto, callback: () -> Unit) {
         CoroutineScope(Dispatchers.IO).launch {
             produtoDao.deletar(produto)
+            withContext(Dispatchers.Main) {
+                callback()
+            }
         }
     }
 

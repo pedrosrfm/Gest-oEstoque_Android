@@ -13,10 +13,11 @@
         android:id="@+id/txtViewCabecalho"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Cadastrar novo produto"
+        android:layout_marginTop="10dp"
         android:fontFamily="@font/geist"
-        android:textStyle="bold"
+        android:text="Cadastrar novo produto"
         android:textSize="34sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -46,18 +47,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtViewCabecalho" />
 
-    <EditText
-        android:id="@+id/edtTxtQuantidade"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginTop="25dp"
-        android:ems="10"
-        android:hint="Quantidade"
-        android:inputType="number"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtTxtNome" />
+        <EditText
+            android:id="@+id/edtTxtQuantidade"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="25dp"
+            android:ems="10"
+            android:hint="Quantidade"
+            android:inputType="number"
+            android:maxLength="3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.502"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edtTxtNome" />
 
     <TextView
         android:id="@+id/txtViewTipoProduto"

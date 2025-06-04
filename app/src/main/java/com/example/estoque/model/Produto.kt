@@ -6,7 +6,7 @@ import androidx.room.ColumnInfo
 
 @Entity(tableName = "produtos")
 data class Produto(
-    @PrimaryKey(autoGenerate = true) val id: Int? = 0,
+    @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val nome: String,
     var quantidade: Int = 0,
     val tipoProduto: TipoProduto

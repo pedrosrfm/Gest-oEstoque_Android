@@ -38,7 +38,6 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-
 //         Criar produto pra quando limpar o banco
 //         dbController.criarProduto(Produto(nome = "Feijão", quantidade = 32, tipoProduto = TipoProduto.ALIMENTO))
 
@@ -50,13 +49,27 @@ class MainActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
     }
 
+    override fun onResume() {
+        super.onResume()
+        atualizarRecyclerView()
+    }
+
+    private fun atualizarRecyclerView() {
+        dbController.listarProdutos { lista ->
+            adapter.atualizarLista(lista)
+        }
+    }
+
     fun onUpdate(produto: Produto) {
         dbController.atualizarProduto(produto)
     }
 
     fun onDelete(produto: Produto) {
-        dbController.deletarProduto(produto)
-        atualizarProdutos()
+        dbController.deletarProduto(produto) {
+            dbController.listarProdutos {
+                adapter.atualizarLista(it)
+            }
+        }
     }
 
     fun atualizarProdutos() {

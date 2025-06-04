@@ -1,6 +1,7 @@
 package com.example.estoque.view
 
 import android.os.Bundle
+import android.text.TextUtils
 import android.widget.Button
 import android.widget.EditText
 import android.widget.RadioGroup
@@ -10,6 +11,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.iterator
+import androidx.core.widget.addTextChangedListener
 import com.example.estoque.R
 import com.example.estoque.database.DatabaseController
 import com.example.estoque.model.Produto
@@ -42,39 +45,61 @@ class CadastrarProdutoActivity : AppCompatActivity() {
         btnCancelar = findViewById(R.id.btnCancelar)
 
         btnCadastrar.isEnabled = false
-        btnCadastrar.setBackgroundColor(ContextCompat.getColor(this, R.color.disabled))
+        btnCadastrar.alpha = 0.5f
 
-        radioGroupTipoProduto.setOnCheckedChangeListener {_, checkedId ->
-            if (checkedId != 1) {
-                btnCadastrar.isEnabled = true
-                btnCadastrar.setBackgroundColor(ContextCompat.getColor(this, R.color.primary))
-            } else {
-                btnCadastrar.isEnabled = false
-                btnCadastrar.setBackgroundColor(ContextCompat.getColor(this, R.color.disabled))
-            }
+//        radioGroupTipoProduto.setOnCheckedChangeListener {_, checkedId ->
+//            if (checkedId != 1) {
+//                btnCadastrar.isEnabled = true
+//                btnCadastrar.setBackgroundColor(ContextCompat.getColor(this, R.color.primary))
+//            } else {
+//                btnCadastrar.isEnabled = false
+//                btnCadastrar.setBackgroundColor(ContextCompat.getColor(this, R.color.disabled))
+//            }
+//        }
+
+        edtNome.addTextChangedListener {
+            verificarCampos()
+        }
+
+        edtQuantidade.addTextChangedListener {
+            verificarCampos()
+        }
+
+        radioGroupTipoProduto.setOnCheckedChangeListener {_, _ ->
+            verificarCampos()
         }
 
         btnCadastrar.setOnClickListener {
             val nome = edtNome.text.toString()
             val quantidade = edtQuantidade.text.toString().toIntOrNull() ?: 0
             val tipoId = radioGroupTipoProduto.checkedRadioButtonId
-            val tipoProduto: TipoProduto = when(tipoId) {
+            val tipoProduto = when(tipoId) {
                 R.id.radioBtnAlimento -> TipoProduto.ALIMENTO
                 R.id.radioBtnBebida -> TipoProduto.BEBIDA
                 R.id.radioBtnLimpeza -> TipoProduto.PRODUTO_DE_LIMPEZA
                 R.id.radioBtnOutro -> TipoProduto.OUTRO
-                else -> return@setOnClickListener
+                else -> ""
             }
 
             Toast.makeText(this, "Produto cadastrado - $nome", Toast.LENGTH_SHORT).show()
-            val produto = Produto(nome = nome, quantidade = quantidade, tipoProduto = tipoProduto)
-            dbController.criarProduto(produto)
+            val novoProduto = Produto(nome = nome, quantidade = quantidade, tipoProduto = tipoProduto as TipoProduto)
+            dbController.criarProduto(novoProduto)
+            finish()
         }
 
         btnCancelar.setOnClickListener {
             finish()
         }
    }
+
+    fun verificarCampos(){
+        val nomePreenchido = edtNome.text.toString().isNotEmpty()
+        val quantidadePreenchido = edtQuantidade.text.toString().isNotEmpty()
+        val radioSelecionado = radioGroupTipoProduto.checkedRadioButtonId != -1
+
+        btnCadastrar.isEnabled = nomePreenchido && quantidadePreenchido && radioSelecionado
+        btnCadastrar.alpha = if (btnCadastrar.isEnabled) 1.0f else 0.5f
+    }
 
     fun onCreateProduct(produto: Produto){
         dbController.criarProduto(produto)

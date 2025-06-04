@@ -16,11 +16,12 @@
         android:layout_width="333dp"
         android:layout_height="115dp"
         android:layout_gravity="center"
+        android:layout_marginTop="10dp"
         android:src="@drawable/logo"
+        app:layout_constraintBottom_toTopOf="@id/recyclerView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/recyclerView"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"

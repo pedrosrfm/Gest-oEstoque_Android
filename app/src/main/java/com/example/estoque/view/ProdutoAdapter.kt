@@ -28,10 +28,17 @@ class ProdutoAdapter(
 
     inner class ProdutoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val tvNomeProduto: TextView = itemView.findViewById(R.id.tvNomeProduto)
+        val tvQuantidade: TextView = itemView.findViewById(R.id.tvQuantidade)
         val btnAdicionar: ImageButton = itemView.findViewById(R.id.btnAdicionar)
         val btnRemover: ImageButton = itemView.findViewById(R.id.btnRemover)
         val btnDeletar: ImageButton = itemView.findViewById(R.id.btnDeletar)
 
+    }
+
+    fun atualizarLista(novaLista: MutableList<Produto>) {
+        produtos.clear()
+        produtos.addAll(novaLista)
+        notifyDataSetChanged()
     }
 
 
@@ -43,7 +50,8 @@ class ProdutoAdapter(
 
     override fun onBindViewHolder(holder: ProdutoViewHolder, position: Int) {
         val produto = produtos[position]
-        holder.tvNomeProduto.text = "${produto.nome} - ${produto.quantidade}"
+        holder.tvNomeProduto.text = "${produto.nome}"
+        holder.tvQuantidade.text = "${produto.quantidade}"
 
         holder.btnAdicionar.setOnClickListener {
             it.animate().scaleX(0.9f).scaleY(0.9f).setDuration(50).withEndAction {
