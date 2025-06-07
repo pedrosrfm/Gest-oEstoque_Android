@@ -53,6 +53,7 @@ dependencies {
     implementation(libs.androidx.room.runtime.android)
     implementation(libs.room.runtime)
     implementation(libs.room.ktx)
+    implementation(libs.google.material)
     kapt(libs.room.compiler)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
